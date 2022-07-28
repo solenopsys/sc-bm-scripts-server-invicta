@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  {{ .Values.fullName }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.selectorLabel }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.selectorLabel }}
+    spec:
+      containers:
+        - name:  {{ .Values.containers.server.name}}
+          image:  {{ .Values.containers.server.image}}
+          ports:
+            - containerPort: {{ .Values.containers.server.httpPort}}
+          env:
+            - name: "server.Host"
+              value: {{ .Values.containers.server.httpHost}}
+            - name: "server.Port"
+              value: "{{ .Values.containers.server.httpPort}}"
+            - name: "baseDir"
+              value: "{{ .Values.containers.server.baseDir}}"

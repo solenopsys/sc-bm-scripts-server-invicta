@@ -1,0 +1,8 @@
+apiVersion: v2
+name: alexstorm-scripts-server
+version: 0.1.2
+description: Scripts server
+icon: "http://alexstorm.solenopsys.org/apps/assets/alexstorm-scripts-server.svg"
+
+
+

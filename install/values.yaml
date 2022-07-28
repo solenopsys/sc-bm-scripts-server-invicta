@@ -1,0 +1,16 @@
+replicasCount: 1
+fullName: "alexstorm-scripts-server"
+selectorLabel:  "alexstorm-scripts-server"
+
+
+service:
+  httpPort: 8080
+
+containers:
+  server:
+    name: server
+    baseDir: "/opt/scripts"
+    image: registry.alexstorm.solenopsys.org/alexstorm-scripts-server
+    pullPolicy: Always
+    httpPort: 8080
+    httpHost: "0.0.0.0"
