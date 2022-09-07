@@ -18,9 +18,9 @@ spec:
           ports:
             - containerPort: {{ .Values.containers.server.httpPort}}
           env:
-            - name: "server.Host"
+            - name: "serverHost"
               value: {{ .Values.containers.server.httpHost}}
-            - name: "server.Port"
+            - name: "serverPort"
               value: "{{ .Values.containers.server.httpPort}}"
             - name: "baseDir"
               value: "{{ .Values.containers.server.baseDir}}"

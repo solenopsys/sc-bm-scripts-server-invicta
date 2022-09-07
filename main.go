@@ -2,11 +2,20 @@ package main
 
 import (
 	"github.com/gorilla/mux"
+	"github.com/joho/godotenv"
 	"log"
 	"net/http"
 	"os"
 	"time"
 )
+
+// init is invoked before main()
+func init() {
+	// loads values from .env into the system
+	if err := godotenv.Load(); err != nil {
+		log.Print("No .env file found")
+	}
+}
 
 func setCorsHeaders(w http.ResponseWriter) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -24,15 +33,15 @@ func cors(fs http.Handler) http.HandlerFunc {
 
 func main() {
 	baseDir := os.Getenv("baseDir")
-
+	log.Println("SCRIPT DIR", baseDir)
 	r := mux.NewRouter()
 
 	pr := "/"
 	r.PathPrefix(pr).Handler(http.StripPrefix(pr, cors(http.FileServer(http.Dir(baseDir)))))
 	http.Handle("/", r)
 
-	host := os.Getenv("server.Host")
-	port := os.Getenv("server.Port")
+	host := os.Getenv("serverHost")
+	port := os.Getenv("serverPort")
 
 	log.Println("START SERVER host,port ", host, " ", port)
 	log.Println("DIR ", baseDir)
