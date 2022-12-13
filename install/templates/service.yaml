@@ -4,6 +4,7 @@ metadata:
   name: {{ .Values.fullName}}
   labels:
     app: {{ .Values.selectorLabel }}
+    uninstall: {{ .Values.selectorLabel }}
 spec:
   ports:
     - port: {{ .Values.service.httpPort }}

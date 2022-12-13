@@ -1,6 +1,7 @@
 package main
 
 import (
+	"git.alexstorm.solenopsys.org/zmq_connector"
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 	"log"

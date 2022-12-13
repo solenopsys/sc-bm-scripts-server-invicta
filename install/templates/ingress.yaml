@@ -4,14 +4,17 @@ metadata:
   name: get-ingress
   annotations:
     kubernetes.io/ingress.class: traefik
+  labels:
+    uninstall: {{ .Values.selectorLabel }}
 spec:
   rules:
-  - http:
-      paths:
-        - path: /
-          pathType: ImplementationSpecific
-          backend:
-            service:
-              name:  {{ .Values.fullName }}
-              port:
-                number: {{ .Values.service.httpPort }}
+    - host: get.alexstorm.solenopsys.org
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name:  {{ .Values.fullName }}
+                port:
+                  number: {{ .Values.service.httpPort }}

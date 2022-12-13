@@ -1,7 +1,7 @@
 #!/bin/sh
 
 REPO_URL="http://helm.alexstorm.solenopsys.org"
-GET_URL="http://127.0.0.1:2283" # http://get.alexstorm.solenopsys.org
+GET_URL="http://get.alexstorm.solenopsys.org" #  "http://127.0.0.1:2283"
 
 get_arch() {
     CUR_ARCH=$(uname -m)
@@ -101,7 +101,7 @@ install_apps()
     install_chart
 
     CHART_NAME="alexstorm-hsm-router"
-    CHART_VERSION="0.1.20"
+    CHART_VERSION="0.1.24"
     install_chart
 
     CHART_NAME="alexstorm-front-modules"
@@ -109,7 +109,11 @@ install_apps()
     install_chart
 
     CHART_NAME="alexstorm-hsm-installer"
-    CHART_VERSION="0.1.5"
+    CHART_VERSION="0.1.9"
+    install_chart
+
+    CHART_NAME="alexstorm-helm-lookup"
+    CHART_VERSION="0.1.19"
     install_chart
 }
 
@@ -122,6 +126,9 @@ install_process(){
  sleep 30
  echo "Install solenopsys apps ..."
  install_apps
+ echo "Wait for the services to start..."
+ sleep 10
+ watch kubectl get pods
 }
 
 install_process
